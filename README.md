@@ -1,6 +1,6 @@
 # Teaching a Car to Drive Itself with Behavioral Cloning
 <figure>
-  <img src="readme_images/sim_screen_shot.png"/>
+  <img src="readme_images/sim_screen_shot1.png"/>
 </figure>
  <p></p> 
  
@@ -19,7 +19,7 @@ I recorded one loop of smooth driving around track 1 to act as the test set. Upl
 > scp -r -i /path/to/your/key-pair.pem /path/to/test/data ubuntu@<your instance's Public DNS>:~/data/car_sim_data_test
  
  ### 3) Augment training data by a factor of 8
-I used three techniques to augment the data. This allowed me to only capture videos of ideal driving, while allowing the model to learn how to correct itself in case it over-turned or under-turned or veered off-center.
+After cropping the images to get rid of as much extraneous information as possible, I used three techniques to augment the data. This allowed me to only capture videos of ideal driving, while allowing the model to learn how to correct itself in case it over-turned or under-turned or veered off-center.
 
 The data from the simulator includes a driving log with the filename of a frame image along with that frame's steering angle, throttle, break, and current speed. There are three camera's, one on the hood's center, one on the left edge of the hood, and another on the right. The validation and test sets only inlclude the center image. For the train set, left and right images are also used. If the car's steering angle is negative, i.e. it's currently turning left, take the right image and subtract 0.2. If the angle is positive, take the left image and add 0.2. If the steering angle is 0, take both right and left images and subtract and add 0.2 respectively. See the 'get_RL_angles' function in model.py (line 10).
 <figure>
@@ -33,7 +33,7 @@ When using the 'get_batches' function (line 133) as the training data generator,
 </figure>
  <p></p> 
 
-After flipping the images, if the steering angle is negative, use the 'warp_persp' function (line 31) to warp images by a random factor so it seems the car is facing farther to the right and decrease angle accordingly.
+After flipping the images, if the steering angle is negative, use the 'warp_persp' function (line 31) to warp images by a random factor so it seems the car is facing farther to the right and decrease angle accordingly. Here's an example of the 'warp_persp' function applied to the cropped images:
 <figure>
   <img src="readme_images/random_warp_left.png"/>
 </figure>
@@ -76,3 +76,9 @@ I used the following archithecture, adding two Batch Normalization layers to inc
 | Out   | fully-connected, num_units=1  |
 
 I trained the model for 2 epochs with the Adam optimizer and Mean Absolute Error cost function. I used a batch size of 16, but since the latter two data augmentation techniques occur with the train generator, the batch size is essentially 64.
+
+Here's a screen shot of the car navigating track 2:
+<figure>
+  <img src="readme_images/sim_screen_shot.png"/>
+</figure>
+ <p></p> 
