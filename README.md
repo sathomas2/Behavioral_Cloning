@@ -8,7 +8,7 @@ Can we teach a car to drive itself with only pixel information from images taken
 
 The contents of this repository include two videos track1.mp4 and track2.mp4 taken from the hood of the car in Udacity's simulation, while the car drives itself around each track. The model used to drive the car can be recreated using model.py, and my results are saved in model.h5. If you have the simulation, you can test my results with drive.py and turn the frame images into a mp4 with video.py. 
 
-Below is a step-by-step at how/why I came up with model.py. Enjoy :)
+Below is a step-by-step of how/why I came up with model.py. Enjoy :)
 
 ### 1) Collect data
 Using the simulator provided by Udacity, I recorded myself driving until I collected about 25,000 frame images from the car's center camera for both tracks. I drove around the tracks clockwise and counter-clockwise to help the model generalize. I tried to keep the steering as smooth as possible and tried to keep the car in the center of the lane. Because the lanes in track 2 are so narrow and the turns so sharp, I essentially ignored the center dotted line as though I had the road to myself.
@@ -27,7 +27,7 @@ I recorded one loop of smooth driving around track 1 to act as the test set. Upl
 ### 3) Augment training data by a factor of 8
 After cropping the images to get rid of as much extraneous information as possible, I used three techniques to augment the data. This allowed me to only capture videos of ideal driving, while allowing the model to learn how to correct itself in case it over-turned or under-turned or veered off-center.
 
-The data from the simulator includes a driving log with the filename of a frame image along with that frame's steering angle, throttle, break, and current speed. There are three camera's, one on the hood's center, one on the left edge of the hood, and another on the right. The validation and test sets only inlclude the center image. For the train set, left and right images are also used. If the car's steering angle is negative, i.e. it's currently turning left, take the right image and subtract 0.2. If the angle is positive, take the left image and add 0.2. If the steering angle is 0, take both right and left images and subtract and add 0.2 respectively. See the 'get_RL_angles' function in model.py (line 10).
+The data from the simulator includes a driving log with the filename of a frame image along with that frame's steering angle, throttle, break, and current speed. There are three cameras, one on the hood's center, one on the left edge of the hood, and another on the right. The validation and test sets only inlclude the center image. For the train set, left and right images are also used. If the car's steering angle is negative, i.e. it's currently turning left, take the right image and subtract 0.2. If the angle is positive, take the left image and add 0.2. If the steering angle is 0, take both right and left images and subtract and add 0.2 respectively. See the 'get_RL_angles' function in model.py (line 10).
 <figure>
   <img src="readme_images/left_n_right_camera.png"/>
 </figure>
