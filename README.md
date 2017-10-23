@@ -4,7 +4,7 @@
 </figure>
  <p></p>
 
-Can we teach a car to drive itself with only pixel information from images taken by a camera on the car's hood and a Deep Convolutional Neural Network? Remarkably, the answers is yes. At least, it seems we can, even in some of the most difficult situations like on mountain roads with switchbacks, when we ignore some of the difficult problems posed by traffic and pedestrians.
+Can we teach a car to drive itself with only pixel information from images taken by a camera on the car's hood and a Deep Convolutional Neural Network? Remarkably, the answer is yes. At least, it seems we can, even in some of the most difficult situations like on mountain roads with switchbacks, when we ignore some of the difficult problems posed by traffic and pedestrians.
 
 The contents of this repository include two videos track1.mp4 and track2.mp4 taken from the hood of the car in Udacity's simulation, while the car drives itself around each track. The model used to drive the car can be recreated using model.py, and my results are saved in model.h5. If you have the simulation, you can test my results with drive.py and turn the frame images into a mp4 with video.py. 
 
